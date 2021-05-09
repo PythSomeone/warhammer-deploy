@@ -101,6 +101,7 @@ def register(request):
             email = form.cleaned_data["email"]
             password = form.cleaned_data["password"]
             user = auth.create_user(email = email , password = password)
+            messages.info(request, 'Welcome, '+email+' to the Warhammer world!')
             return redirect('/helper/home')
     else:
         form = RegisterForm()
@@ -166,6 +167,16 @@ def profile(request):
             obj.append(character)
 
     return render(request, 'helper/profile.html', {'obj': obj})
+
+def characters(request):
+    user_characters = Handler.get_data('character')
+    obj = [] 
+    if user_characters:
+        for entity in user_characters:
+            character = Character(**entity)
+            obj.append(character)
+
+    return render(request, 'helper/characters.html', {'obj': obj})
 
 def lore(request):
     professions = Handler.get_data('professions')

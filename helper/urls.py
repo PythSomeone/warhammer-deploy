@@ -17,6 +17,7 @@ urlpatterns = [
     path('template/', CreatorWizard.as_view([CreatorForm1, CreatorForm2, CreatorForm3]), name='template'),
     path('home/', views.home, name='Home'),
     path('profile/', views.profile, name='profile'),
+    path('characters/', views.characters, name='characters'),
     path('lore/', views.lore, name='lore'),
     path('helper/', redirect_view),
     url(r'^delete/(?P<userUID>[\w\-]+)/(?P<name>[\w\-]+)/$', views.character_delete, name='character_delete')
