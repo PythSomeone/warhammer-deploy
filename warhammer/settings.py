@@ -134,6 +134,5 @@ CRISPY_TEMPLATE_PACK="bootstrap4"
 
 
 # Activate Django-Heroku.
-if '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
+
+django_heroku.settings(locals())
