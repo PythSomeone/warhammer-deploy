@@ -1,0 +1,22 @@
+{% extends "helper/base.html" %}
+{% load bootstrap4 %}
+{% block title %}<h1>Home page</h1>{% endblock %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+<div class="d-flex flex-column mx-auto w-50">
+     <p class="text-center">Pobierz aplikację desktop</p>
+     <input type="button" class="btn btn-info" value="Warhammer-helper.exe" onclick=" relocate_home()">
+</div>
+<script>
+function relocate_home()
+{
+     location.href = "https://files.fm/down.php?i=zhjxqurkh";
+} 
+</script>
+    {% for message in messages %}
+        <script>
+            alert('{{ message }}');
+        </script>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "helper/base.html" %}
+{% load bootstrap4 %}
+{% block title %}<h1>Login to a Account</h1>{% endblock %}
+{% load crispy_forms_tags%}
+
+{% block content %}
+    <form method="POST" class="form-group">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Login</button>
+    </form>
+    {% if messages %}
+    <ul class="messages">
+            {% for message in messages %}
+            <script>
+                alert('{{ message }}');
+            </script>
+            {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

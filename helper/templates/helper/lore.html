@@ -1,0 +1,50 @@
+{% extends "helper/base.html" %}
+{% load bootstrap4 %}
+{% block title %}<h1>Lore page</h1>{% endblock %}
+{% load crispy_forms_tags%}
+{% load my_tags %}
+
+{% block content %}
+<h1>Races</h1>
+<br>
+{% for entity in races %}
+<div class="d-flex flex-column justify-content-center">
+        <h3>{{entity.name}}</h3>
+        <hr>
+        {{entity.description}}
+        <hr>
+        <h5>Primary statistics</h5>
+        {% for key, val in entity|get_primary_statistics %}
+                {{key}} : {{val}}
+        {% endfor %}
+        <h5>Secondary statistics</h5>
+        {% for key, val in entity|get_secondary_statistics %}
+                {{key}} : {{val}}
+        {% endfor %}
+        <hr>
+        <hr>
+</div>
+{% endfor %}
+<br>
+<h1>Professions</h1>
+{% for entity in professions %}
+<div class="d-flex flex-column justify-content-center">
+        <h3>{{entity.name}}</h3>
+        <hr>
+        {{entity.description}}
+        <hr>
+        <h5>Primary statistics</h5>
+        {% for key, val in entity|get_primary_statistics %}
+                {{key}} : {{val}}
+        {% endfor %}
+        <h5>Secondary statistics</h5>
+        {% for key, val in entity|get_secondary_statistics %}
+                {{key}} : {{val}}
+        {% endfor %}
+        <hr>
+        <hr>
+
+</div>
+{% endfor %}
+
+{% endblock %}

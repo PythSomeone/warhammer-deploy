@@ -1,0 +1,79 @@
+{% extends "helper/base.html" %}
+{% load i18n %}
+{% load my_tags %}
+{% load crispy_forms_tags%}
+{% block head %}
+{{ wizard.form.media }}
+{% endblock %}
+
+{% block content %}
+<p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+<form action="" method="post" >{% csrf_token %}
+<table class="table">
+{{ wizard.management_form }}
+{% if wizard.form.forms %}
+    {{ wizard.form.management_form }}
+    {% block form %}
+        {{ wizard.form}}
+    {% endblock %}
+{% else %}
+    {{ wizard.form }}
+{% endif %}
+
+{% if wizard.steps.step1 == 3%}
+    <h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Primary</th>
+        {% for key, val in primaryStats|get_primary_statistics %}
+            <th scope="col">{{key}}</th>
+        {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Stats</th>
+        {% for key, val in primaryStats|get_primary_statistics %}
+            <td>{{val}}</th>
+        {% endfor %}
+    </tr>
+  </tbody>
+</table>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Secondary</th>
+        {% for key, val in secondaryStats|get_secondary_statistics %}
+            <th scope="col">{{key}}</th>
+        {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Stats</th>
+        {% for key, val in secondaryStats|get_secondary_statistics %}
+            <td>{{val}}</th>
+        {% endfor %}
+    </tr>
+  </tbody>
+</table>
+<p>To reroll go to the previous step</p>
+{% endif %}
+
+</table>
+{% if wizard.steps.prev %}
+<button name="wizard_goto_step" class="btn btn-info" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
+<button name="wizard_goto_step" class="btn btn-info" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+{% endif %}
+
+
+<input type="submit" class="btn btn-success" value="{% trans "submit" %}"/>
+</form>
+    {% for message in messages %}
+        <script>
+            alert('{{ message }}');
+        </script>
+    {% endfor %}
+{% endblock %}

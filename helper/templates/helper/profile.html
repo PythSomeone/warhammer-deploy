@@ -1,0 +1,40 @@
+{% extends "helper/base.html" %}
+{% load bootstrap4 %}
+{% block title %}<h1>View my characters</h1>{% endblock %}
+{% block content %}
+{% load my_tags %}
+
+<div class="d-flex flex-column justify-content-center">
+    {% for entity in obj %}
+    <div class="btn-group dropright mx-auto">
+    <form action="{% url 'helper:character_delete' entity.userUID entity.name %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+    <button type="button" class="btn btn-secondary">
+        Name: {{entity.name}}
+        <hr>
+        Race: {{entity.race}}
+    </button>
+    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Toggle Dropright</span>
+    </button>
+    <div class="dropdown-menu">
+        {% for key, val in entity|get_fields %}
+            {% if key != "userUID" and key != "id"%}
+                <li>
+                    <a href='#'>{{ key }}: {{ val }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+
+    </div>
+    <br>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
