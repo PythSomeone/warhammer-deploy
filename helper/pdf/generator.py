@@ -9,9 +9,6 @@ class Creator:
     title = 'Warhammer Helper'
     logoSrc = 'staticfiles\WH_logo.png'
 
-    pdfmetrics.registerFont(
-        TTFont('CA', fontSrc)
-    )
 
     def reformatPrimaryStatistics(self, character):
         primary_reformated = []
