@@ -7,17 +7,17 @@
 <div class="d-flex flex-column justify-content-center">
     {% for entity in obj %}
     <div class="btn-group dropright mx-auto">
-    <form action="{% url 'helper:character_delete' entity.userUID entity.name %}" method="post">
+    <form action="{% url 'helper:character_delete' entity.userUID entity.name %}" method="post" class="my-auto">
         {% csrf_token %}
-        <input type="submit" value="Delete">
+        <input type="submit" value="Delete" class="h-100">
     </form>
-    <form action="#" method="get">
-        <input type="text" value="{{entity|get_fields|get_dict}}" name="mytextbox" size="1"/>
+    <form action="#" method="get" class="my-auto">
+        <input type="hidden" value="{{entity|get_fields|get_dict}}" name="mytextbox" size="1"/>
         <input type="submit" class="btn" value="edit" name="mybtn">
     </form>
     <input type="submit" value="Download" name="summary" />
 
-    <button type="button" class="btn btn-secondary">
+    <button type="button" class="btn btn-secondary w-50">
         Name: {{entity.name}}
         <hr>
         Race: {{entity.race}}
