@@ -41,13 +41,13 @@ class Creator:
         pdf = canvas.Canvas(buffer)
         pdf.setTitle(self.title)
 
-        pdf.setFont('CA', 64)
+        pdf.setFont('Helvetica', 40)
         pdf.drawString(30, 770, "Warhammer")
         pdf.drawString(30, 700, "Helper")
         pdf.drawImage(self.logoSrc, 380, 670, 150, 150, mask='auto')
         pdf.line(0, 650, 800, 650)
 
-        pdf.setFont('CA', 28)
+        pdf.setFont('Helvetica', 28)
         pdf.drawString(30, 600, "Name : " + character['name'])
         pdf.drawString(30, 560, "Gender : " + character['sex'])
         pdf.drawString(30, 520, "Age : " + character['age'])
@@ -60,7 +60,7 @@ class Creator:
         pdf.drawString(260, 480, "Weapon : " + character['weapon'])
         pdf.drawString(260, 440, "Armor : " + character['armor'])
 
-        pdf.setFont("CA", 16)
+        pdf.setFont("Helvetica", 16)
         pdf.drawString(30, 350, "Profession : " + character['profession'])
         pdf.drawString(30, 310, "Equipment : " + character['equipment'])
         pdf.drawString(30, 270, "Origin : " + character['origin'])
@@ -76,6 +76,5 @@ class Creator:
             index += 60
 
         pdf.save()
-        print("Udało się")
         buffer.seek(0)
         return buffer
