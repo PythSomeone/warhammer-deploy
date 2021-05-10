@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'warhammer.urls'
@@ -80,6 +81,7 @@ TEMPLATE_DIRS = (
 
 WSGI_APPLICATION = 'warhammer.wsgi.application'
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
