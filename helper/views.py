@@ -121,6 +121,7 @@ def login(request):
                 messages.info(request, 'Successfully logged in!')
                 print(user['email'] + " logged in")
                 Handler.session_handler(request, user)
+                return redirect('/helper/home')
             except:
                 messages.info(request, 'Invalid email or password!')
                 form = LoginForm()
@@ -134,6 +135,7 @@ def logout(request):
     try:
         del request.session['uid']
         del request.session['email']
+        messages.info(request, 'Successfully logged out!')
     except KeyError:
         pass
 
@@ -141,7 +143,8 @@ def logout(request):
 
 def profile(request):
     if not Handler.user_exists(request):
-        return redirect('/helper/login')
+        messages.info(request, 'Please log in to see your characters')
+        return redirect('/helper/home')
     user_characters = Handler.get_data_by_uid(request, 'character')
     obj = [] 
     if user_characters:
