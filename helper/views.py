@@ -11,7 +11,6 @@ from formtools.wizard.views import SessionWizardView
 
 from .forms import RegisterForm
 from .forms import LoginForm
-from .forms import CreatorForm
 
 from firebase_admin import auth
 import pyrebase
@@ -64,7 +63,7 @@ class CreatorWizard(SessionWizardView):
         except:
             pass
         data.update(Handler.get_inventory(form_list[1].cleaned_data['profession']))
-        #Handler.push_data(data,'character')
+        Handler.push_data(data,'character')
         messages.info(self.request, 'Character with name '+ data['name']+' has been created!')
         return redirect('/helper/template')
     
@@ -129,22 +128,6 @@ def login(request):
         form = LoginForm()
 
     return render(request, 'helper/login.html', {'form': form})
-
-def creator(request):
-    if request.method == 'POST':
-        form = CreatorForm(request.POST)
-        if form.is_valid():
-            if 'uid' in request.session:
-                form.cleaned_data["userUID"] = str(request.session['uid'])
-            data = form.cleaned_data
-            Handler.push_data(data,'character')
-            messages.info(request, 'Character with name '+ data['name']+'has been created!')
-            return redirect('/helper/creator')
-    else:
-        form = CreatorForm()
-
-    return render(request, 'helper/charcreation.html', {'form': form})
-
 
 
 def logout(request):

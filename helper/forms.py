@@ -15,30 +15,12 @@ class LoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput())
 
-class CreatorForm(ModelForm):
-    """
-    def __init__(self, *args, userUID):
-        super(CreatorForm, self).__init__(*args)
-        self.userUID = userUID
-    """
-    class Meta:
-        model = Character
-        fields = '__all__'
-        widgets = {
-            'profession': forms.Select(choices=Handler.get_data_in_list('Professions')),
-            'race': forms.Select(choices=Handler.get_data_in_list('Races')),
-            'sex': forms.Select(choices=Handler.get_data_in_list('Sex')),
-            'star_sign': forms.Select(choices=Handler.get_data_in_list('Starsigns')),
-            'userUID' : forms.HiddenInput(),
-            #'keyid' : forms.HiddenInput()
-            #'date' : forms.HiddenInput()
-        }
 
 class CreatorForm1(ModelForm):
     class Meta:
         model = Character
         fields = '__all__'
-        exclude = ('profession', 'weapon', 'equipment',)
+        exclude = ('profession', 'weapon', 'equipment','armor')
         widgets = {
             'race': forms.Select(choices=Handler.get_data_in_list('Races')),
             'star_sign': forms.Select(choices=Handler.get_data_in_list('Starsigns')),
