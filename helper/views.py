@@ -12,6 +12,7 @@ from formtools.wizard.views import SessionWizardView
 from .forms import RegisterForm
 from .forms import LoginForm
 
+from django.http import FileResponse
 from firebase_admin import auth
 import pyrebase
 
@@ -19,6 +20,12 @@ import pyrebase
 from helper.models import Character
 from helper import authe
 from helper.services.handler import Handler
+
+import ast
+
+
+from helper.pdf.generator import Creator
+creatorpdf = Creator()
 
 class CreatorWizard(SessionWizardView):
     primaryStatistics = {}
@@ -151,6 +158,11 @@ def profile(request):
         for entity in user_characters:
             character = Character(**entity)
             obj.append(character)
+    if(request.GET.get('mybtn')):
+        character = ast.literal_eval(request.GET.get('mytextbox'))
+        buffer = creatorpdf.createPDF(character)
+        return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
+
 
     return render(request, 'helper/profile.html', {'obj': obj})
 

@@ -1,7 +1,9 @@
 from django import template
 from helper.services.handler import Handler
 
+
 register = template.Library()
+
 
 @register.filter
 def get_fields(obj):
@@ -22,13 +24,10 @@ def get_secondary_statistics(obj):
     secondaryStatistics = Handler.get_secondary_statistics(obj)
     return secondaryStatistics.items()
 
-
 @register.filter
-def roll():
-    stats = ""
-    for i in range(0, 8):
-        number = randint(1, 20)
-        if number < 10:
-            number = "0" + str(number)
-        stats += str(number)
-    return stats
+def get_dict(obj):
+    di = {}
+    for a, b in obj:
+        di[a] = b
+    return di
+

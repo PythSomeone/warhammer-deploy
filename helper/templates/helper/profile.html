@@ -11,6 +11,12 @@
         {% csrf_token %}
         <input type="submit" value="Delete">
     </form>
+    <form action="#" method="get">
+        <input type="text" value="{{entity|get_fields|get_dict}}" name="mytextbox" size="1"/>
+        <input type="submit" class="btn" value="edit" name="mybtn">
+    </form>
+    <input type="submit" value="Download" name="summary" />
+
     <button type="button" class="btn btn-secondary">
         Name: {{entity.name}}
         <hr>
