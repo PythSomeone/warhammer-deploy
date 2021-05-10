@@ -27,29 +27,9 @@
     <div class="dropdown-menu">
         {% for key, val in entity|get_fields %}
             {% if key != "userUID" and key != "id"%}
-                {% if key == "primary_statistics"%}
-                Primary statistics
-                <br>
-                    {% for name, stat in entity|get_fields|get_dict|get_primary_statistics %}
-                        <li>
-                        
-                        <a href='#'>{{ name }}: {{ stat }}</a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
-                {% if key == "secondary_statistics"%}
-                Secondary statistics
-                    {% for name, stat in entity|get_fields|get_dict|get_secondary_statistics %}
-                        <li>
-                        <a href='#'>{{ name }}: {{ stat }}</a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
-                {% if key != "secondary_statistics" and key != "primary_statistics"%}
-                    <li>
-                        <a href='#'>{{ key }}: {{ val }}</a>
-                    </li>
-                {% endif %}
+                <li>
+                    <a href='#'>{{ key }}: {{ val }}</a>
+                </li>
             {% endif %}
         {% endfor %}
     </div>

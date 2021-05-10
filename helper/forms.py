@@ -24,6 +24,7 @@ class CreatorForm1(ModelForm):
         widgets = {
             'race': forms.Select(choices=Handler.get_data_in_list('Races')),
             'star_sign': forms.Select(choices=Handler.get_data_in_list('Starsigns')),
+            'sex': forms.Select(choices=Handler.get_data_in_list('Sex')),
             'userUID' : forms.HiddenInput(),
             'primary_statistics' : forms.HiddenInput(),
             'secondary_statistics' : forms.HiddenInput(),

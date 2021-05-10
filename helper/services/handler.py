@@ -122,23 +122,12 @@ class Handler:
             return True
 
     @staticmethod
-    def json_to_tuple(items):
-        snapshot : str
-        data: list = []
-        value = str(items).replace("\'", "\"")
-        snapshot = json.loads(value)
-        for key, val in snapshot.items():
-            if key != "userUID":
-                data.append(str(key) + str(val))
-        return data
-
-    @staticmethod
     def get_primary_statistics(obj):
         primaryNames = ["WS", "BS", "S", "T", "AG", "INT", "WP", "FEL"]
         primaryStatistics = {}
         if(type(obj) == dict):
             for i in range(0, 8):
-                primaryCell = obj['primary_statistics'][i * 2] + obj['primary_statistics'][(i * 2) + 1]
+                primaryCell = obj['primaryStatistics'][i * 2] + obj['primaryStatistics'][(i * 2) + 1]
                 primaryStatistics[primaryNames[i]]= primaryCell
         if(type(obj) == str):
             for i in range(0, 8):
@@ -153,7 +142,7 @@ class Handler:
         secondaryStatistics = {}
         if(type(obj) == dict):
             for i in range(0, 8):
-                secondaryCell = obj['secondary_statistics'][i * 2] + obj['secondary_statistics'][(i * 2) + 1]
+                secondaryCell = obj['secondaryStatistics'][i * 2] + obj['secondaryStatistics'][(i * 2) + 1]
                 secondaryStatistics[secondaryNames[i]]= secondaryCell
         if(type(obj) == str):
             for i in range(0, 8):
