@@ -138,7 +138,7 @@ class Handler:
         primaryStatistics = {}
         if(type(obj) == dict):
             for i in range(0, 8):
-                primaryCell = obj['primaryStatistics'][i * 2] + obj['primaryStatistics'][(i * 2) + 1]
+                primaryCell = obj['primary_statistics'][i * 2] + obj['primary_statistics'][(i * 2) + 1]
                 primaryStatistics[primaryNames[i]]= primaryCell
         if(type(obj) == str):
             for i in range(0, 8):
@@ -153,7 +153,7 @@ class Handler:
         secondaryStatistics = {}
         if(type(obj) == dict):
             for i in range(0, 8):
-                secondaryCell = obj['secondaryStatistics'][i * 2] + obj['secondaryStatistics'][(i * 2) + 1]
+                secondaryCell = obj['secondary_statistics'][i * 2] + obj['secondary_statistics'][(i * 2) + 1]
                 secondaryStatistics[secondaryNames[i]]= secondaryCell
         if(type(obj) == str):
             for i in range(0, 8):

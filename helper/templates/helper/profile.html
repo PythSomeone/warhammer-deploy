@@ -7,17 +7,16 @@
 <div class="d-flex flex-column justify-content-center">
     {% for entity in obj %}
     <div class="btn-group dropright mx-auto">
-    <form action="{% url 'helper:character_delete' entity.userUID entity.name %}" method="post" class="my-auto">
+    <form action="{% url 'helper:character_delete' entity.userUID entity.name %}" method="post">
         {% csrf_token %}
         <input type="submit" value="Delete" class="h-100">
     </form>
-    <form action="#" method="get" class="my-auto">
+    <form action="#" method="get">
         <input type="hidden" value="{{entity|get_fields|get_dict}}" name="mytextbox" size="1"/>
-        <input type="submit" class="btn" value="edit" name="mybtn">
+        <input type="submit" value="Download" name="mybtn" class="h-100">
     </form>
-    <input type="submit" value="Download" name="summary" />
 
-    <button type="button" class="btn btn-secondary w-50">
+    <button type="button" class="btn btn-secondary" style="width: 300px">
         Name: {{entity.name}}
         <hr>
         Race: {{entity.race}}
@@ -28,9 +27,29 @@
     <div class="dropdown-menu">
         {% for key, val in entity|get_fields %}
             {% if key != "userUID" and key != "id"%}
-                <li>
-                    <a href='#'>{{ key }}: {{ val }}</a>
-                </li>
+                {% if key == "primary_statistics"%}
+                Primary statistics
+                <br>
+                    {% for name, stat in entity|get_fields|get_dict|get_primary_statistics %}
+                        <li>
+                        
+                        <a href='#'>{{ name }}: {{ stat }}</a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+                {% if key == "secondary_statistics"%}
+                Secondary statistics
+                    {% for name, stat in entity|get_fields|get_dict|get_secondary_statistics %}
+                        <li>
+                        <a href='#'>{{ name }}: {{ stat }}</a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+                {% if key != "secondary_statistics" and key != "primary_statistics"%}
+                    <li>
+                        <a href='#'>{{ key }}: {{ val }}</a>
+                    </li>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </div>

@@ -7,8 +7,8 @@ import io
 class Creator:
     fileName = 'WH_character_sheet.pdf'
     title = 'Warhammer Helper'
-    logoSrc = 'helper/static/WH_logo.png'
-    fontSrc = 'helper/static/CaslonAntique.ttf'
+    logoSrc = 'staticfiles/WH_logo.png'
+    fontSrc = 'staticfiles/CaslonAntique.ttf'
 
     pdfmetrics.registerFont(
         TTFont('CA', fontSrc)

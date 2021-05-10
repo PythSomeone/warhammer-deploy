@@ -161,7 +161,7 @@ def profile(request):
     if(request.GET.get('mybtn')):
         character = ast.literal_eval(request.GET.get('mytextbox'))
         buffer = creatorpdf.createPDF(character)
-        return FileResponse(buffer, as_attachment=True, filename='hello.pdf')
+        return FileResponse(buffer, as_attachment=True, filename='WH_character_sheet.pdf')
 
 
     return render(request, 'helper/profile.html', {'obj': obj})
